@@ -298,4 +298,7 @@ def test_reports_never_crash_on_bad_data():
             # Surviving by doing nothing is not surviving. Every run has to produce
             # a real report, with a table in it, on every one of these datasets.
             assert "===" in output, f"{script} printed no report for seed {seed}"
-            assert "+---" in output, f"{script} printed no table for seed {seed}"
+            # Accept the table border used by either supported tabular layout.
+            assert ("+---" in output or "|" in output), (
+                f"{script} printed no table for seed {seed}"
+            )

@@ -22,20 +22,35 @@ Before running:  pip install -r requirements.txt
     python code/main_daily_report.py 42     # the generated data for seed 42
 """
 
-# --- The report ------------------------------------------------------------------
-#
-# No scaffolding. You have written two of these now, and this one asks the same
-# three questions of the same data: extract it, transform it, show it.
-#
-# What you have to work out for yourself:
-#
-#   - which package functions this report needs, and in what order
-#   - one function that does not exist yet — see README Step 9
-#   - the same seed handling the other two reports do
-#
-# README Step 9 shows the exact output your report must produce. The integration
-# tests check it line for line, so match it character for character.
-#
-# The rules have not changed: no arithmetic and no formatting logic in a report. If
-# you need a calculation this file cannot get by calling the package, the
-# calculation belongs in sales_pipeline/transform.py.
+import sys
+
+from sales_pipeline import (
+    calculate_total_revenue,
+    clean_sales_data,
+    find_top_entry,
+    get_raw_sales_data,
+    print_day_table,
+    summarize_by_day,
+)
+
+seed = None
+if len(sys.argv) > 1 and sys.argv[1].strip() != "":
+    seed = int(sys.argv[1])
+
+print("=== OPERATIONS: Sales by Day ===")
+print()
+
+raw_data = get_raw_sales_data(seed)
+clean_data = clean_sales_data(raw_data)
+day_summary = summarize_by_day(clean_data)
+
+total_revenue = calculate_total_revenue(clean_data)
+print_day_table(day_summary)
+print()
+print(f"Total Revenue:          ${total_revenue:,.2f}")
+
+revenue_leader = find_top_entry(day_summary, "revenue")
+units_leader = find_top_entry(day_summary, "units_sold")
+
+print(f"Busiest day by revenue: {revenue_leader['date']} (${revenue_leader['revenue']:,.2f})")
+print(f"Busiest day by units:   {units_leader['date']} ({units_leader['units_sold']} units)")

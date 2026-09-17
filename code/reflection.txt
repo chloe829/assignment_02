@@ -1,4 +1,17 @@
-Write your reflection here.
+In this assignment, I learned how to use packages, which prevented me from rewriting the
+same code over and over again in different files. For example, we created many of the 
+functions that were used in the transform.py file. We built functions such as clean_currency
+which converts raw prices into floats, making it look cleaner and easier to analyze. Using 
+functions such as the ones mentioned, we put them all into a package called __init__.py, all
+of the functions we created eventually went there. We were able to import these functions into
+different files (e.g. main_finance_report.py, main_daily_report.py) that allowed the code to
+actually create the desired output. Throughout this whole experience, it allowed me to start
+to learn how to begin to build data pipelines. I think I had the most trouble in 
+main_marketing_report.py and I think my issue may have been calling functions incorrectly, 
+such as find_top_entry.py not being in the right place. Therefore, for the future, I want to 
+make sure I'm calling the correct functions and understanding where to call things and when. 
+I think this would include ensuring I have a very deep understanding of the functions being 
+made.
 
 See reflection.md for what makes a good reflection — be specific, use the
 terminology from this assignment (package, module, ETL, coercion, public API,
